@@ -1,0 +1,206 @@
+<!--One_Wrap-->
+<style type="text/css">
+
+td{padding:5px; font-size:13px; font-weight:bold;}
+
+
+</style>
+            <div class="one_wrap fl_left">
+                <div class="widget">
+                    <div class="widget_title"><span class="iconsweet">8</span>
+                        <h5>Holiday List</h5>
+                    </div>
+                    <div class="widget_body">
+                        <div class="content_pad">
+                        	 <!--Typography--> 
+                            <h1>List of Holidays 2013</h1>
+                            <p><table width="75%" align="center" cellpadding="2" cellspacing="2">
+  <col width="64" />
+  <col width="102" />
+  <col width="143" />
+  <col width="80" />
+  <col width="64" span="3" />
+  <tr>
+    <td width="36">&nbsp;</td>
+    <td width="127">MONTH/DATE/DAY</td>
+    <td width="243">OCCASION</td>
+    <td width="103">BANGALORE</td>
+    <td width="84">Hyderabad</td>
+    <td width="84">DELHI</td>
+    <td width="89">MUMBAI</td>
+  </tr>
+  <tr>
+    <td colspan="7"><hr /></td>
+    </tr>
+  <tr>
+    <td>1</td>
+    <td>Jan 01 Tue</td>
+    <td width="243">New Years Day</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Mar 27 Wed</td>
+    <td width="243">Holi</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Mar 29 Fri</td>
+    <td width="243">Good Friday</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Apr 11 Thu</td>
+    <td width="243">GudiPadava</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Apr 19 Fri</td>
+    <td width="243">Ram    Navami</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">*</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>May 01 Wed</td>
+    <td width="243">May    Day</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Aug 09 Fri</td>
+    <td width="243">Idu'l    Fitr</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Aug 15 Thu</td>
+    <td width="243">Independence    Day</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>Aug 20 Tue</td>
+    <td width="243">Raksha    Bandhan</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">*</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>Aug 28 Wed</td>
+    <td width="243">Janmashtami</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>Sept    09 Mon</td>
+    <td width="243">Ganesh    Chaturthi</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>Sept    16 Mon</td>
+    <td width="243">Onam</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>Oct 02 Wed</td>
+    <td width="243">Mahatma    Gandhi Birthday</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td>Oct 16 Wed</td>
+    <td width="243">Idu;l    Zuha ( Bakrid )</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td>Nov 4 Mon</td>
+    <td width="243">Padwa Puja &amp; Govardhan Puja</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>Nov 5 Tue</td>
+    <td width="243">Bhai    Duj</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">*</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>17</td>
+    <td>Nov 14 Thu</td>
+    <td width="243">Muharram</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+  <tr>
+    <td>18</td>
+    <td>Dec 25 Wed</td>
+    <td width="243">Christmas Day</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+    <td align="center">*</td>
+  </tr>
+</table></p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            
+        
+         <br class="clear" />

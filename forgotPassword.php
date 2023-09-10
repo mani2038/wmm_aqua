@@ -1,0 +1,182 @@
+<!--Stylesheets-->
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/main.css" />
+<style type="text/css">
+.form_fields_container li div.form_input input, .form_fields_container li div.form_input textarea{
+width:100%;
+}
+</style>
+<?php include("inc_connection.php");?>
+
+<script type="text/javascript">
+function check()
+{
+	
+		
+	if (document.form1.regEmail.value=="")
+	{
+		alert("Please enter the Email.");
+		document.form1.regEmail.focus();
+		return false;
+	}
+	
+	return true;
+}
+</script>
+<?php
+
+include('commonFunction.php');
+
+if(isset($_POST['regEmail']) && $_POST['regEmail']!='')
+{
+$regEmail = addslashes(trim($_POST['regEmail']));
+
+$query			=	"SELECT * from oxy2_users where username='$regEmail' and status='1'";
+
+
+$rs				=	mysqli_query($con,$query);
+
+	if(mysqli_num_rows($rs)>=1)
+
+	{
+		$gen_md5_password = gen_md5_password(8);
+
+		$databaseUpdatedPassword = md5($gen_md5_password);
+		
+		$queryUpp	=	"UPDATE oxy2_users SET password='$databaseUpdatedPassword',password_temp = '$gen_md5_password' WHERE username='$regEmail' and status='1'";
+		
+		
+	
+		mysqli_query($con,$queryUpp);
+		
+		
+		$objUser = mysqli_fetch_array($rs);
+		$password_temp = $gen_md5_password;
+		$fname = $objUser['fname'];
+		$lname = $objUser['lname'];
+		$fullName = $fname." ".$lname;
+		
+		//Sending Mail
+		
+		$to = $regEmail;
+		$ccEmail = "imanish.yadav@gmail.com"; 
+		$subject = 'Forgot Password : '.$fullName; 
+		$random_hash = md5(date('r', time())); 		
+		$headers .= "Reply-To: WaterMarketing Aqua <contact@watermarkmktg.com>\r\n";
+		$headers .= "Return-Path: WaterMarketing Aqua <contact@watermarkmktg.com>\r\n";
+		$headers .= "From: WaterMarketing Aqua <contact@watermarkmktg.com>\r\n"; 
+		$headers .= "Organization: Aqua\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+		$headers .= "X-Priority: 3\r\n";
+		$headers .= "X-Mailer: PHP". phpversion() ."\r\n"; 
+		
+			
+		$message.= "<html>";
+		$message.= "<head>";
+		$message.= "<title>WaterMarketing Aqua Forgot Password Sent</title>";
+		$message.= "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>";
+		$message.= "</head>";
+		$message.= "<body>";
+		$message.= "<table align='center' cellpadding='0' cellspacing='0' style='border:1px solid lightgray;width:100%;'>";
+		$message.= "";
+		
+		$message.= "<tr style='background:#515B5E;'>";
+		$message.= "<td colspan='2'><img src='http://watermarkmktg.com/aqua/images/logo.png' alt='Logo' style='width:154px;height:39px;padding:10px;color:white;border:none;'/></td>";
+		$message.= "</tr>";
+		$message.= "<br />";
+		
+		$message.= "<table align='center' cellpadding='0' cellspacing='0' style='padding:10px;width:100%;'>";
+		$message.= "<tr>";
+		$message.= "<td style='margin:10px;' colspan='2'><font color='#000000' size='2' face='Arial, Helvetica, sans-serif'></td>";
+		$message.= "</tr>";
+		$message.= "<br />";
+		
+		$message.= "<tr style='margin:10px;'>";
+		$message.= "<td colspan='2' align='center'><font color='#000000' size='2' face='Arial, Helvetica, sans-serif'><b>$fullName </b>your new password is :<h3>$gen_md5_password</h3></td>";
+		$message.= "</tr>";
+		
+		$message.= "<br />";
+		
+		$message.= "</table>";
+		$message.= "</body>";
+		$message.= "</html>";
+		$mail_sent = @mail( $to, $subject, $message, $headers );
+		
+		//Mail Ended
+
+
+	?>
+
+	<script type="text/javascript">
+    window.location = "forgotPassword.php?error=true";
+    </script>
+		
+	<?php 
+
+		
+	}
+	
+	else
+
+	{?>
+
+	<script type="text/javascript">
+    alert("Email Id doesn't exist , please try with registered Email.");
+    window.location = "login.php";
+    </script>
+		
+	<?php }
+	
+
+
+
+}
+
+?>
+
+<!--One_Wrap-->
+ 	<div class="one_wrap fl_left">
+    	<div class="widget">
+        	<div class="widget_title"><span class="iconsweet">r</span>
+        	<h5>Forgot Password</h5></div>
+            <div class="widget_body">
+            
+            
+            
+            
+           
+            <form action="#" method="post" name="form1" id="form1" onSubmit="return check()">
+            
+            
+            <ul class="form_fields_container">
+            
+            <?php if(isset($_REQUEST['error']) && $_REQUEST['error'] == "true"){?>
+			
+            <li><label>
+            <h3>Password has been sent to your Email Id.</h3><br/>
+            <span style="font-size:9px;"><strong>Note:</strong> Please check quarantine , in case you don't receive your mail.</span>
+            
+            
+            </label></li>
+            
+			<?php } else {
+			?>
+            
+            <li><label>Please enter the registered Email: *</label> <div class="form_input"><input name="regEmail" id="regEmail"  type="text" class="tip_east" title="New Password"></div></li>
+            
+            <li style="text-align:center"><input type="submit" name="submit" id="submit" value="Submit" style="background: #CCC;color:#000000;text-shadow: 1px 1px #DDD; padding:6px;border-radius:5px; font-weight:bold;"/></li>
+            
+             <?php } ?>
+            
+            </ul>
+            </form> 
+            
+           
+  
+  </div>
+        </div>
+    </div>
+                     
+ 	<br class="clear" />   
+

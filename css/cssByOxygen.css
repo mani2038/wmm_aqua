@@ -1,0 +1,62 @@
+table.display span.pj_cat {
+display: inline-block;
+line-height: 100%;
+background: #757673;
+padding: 3px 5px;
+font-size: 10px;
+text-transform: uppercase;
+color: white;
+text-shadow: 0px 1px 0px #646464;
+border-radius: 3px;
+}
+table.display span.green_highlight {
+background:#060;
+}
+table.display span.blue_highlight {
+background: #4572A7;
+}
+
+table.display span.grey_highlight {
+background:#3D434B;
+}
+
+table.display span.yellow_highlight {
+background: #FF0;
+color:#000;
+}
+table.display span.red_highlight {
+background: #F00;
+}
+
+tr.odd.gradeA td.sorting_1 {
+background-color: none;
+}
+tr.odd td.sorting_1 {
+background-color: none;
+}
+
+/* Css for Input box*/
+
+.form_fields_container li div.form_input input, .form_fields_container li div.form_input textarea{
+width:30%;
+}
+div.form_input textarea {
+width: 70%!important;
+}
+label .color{
+padding: 3px 5px;display: inline-block;line-height: 100%;background: #757673;padding: 3px 5px;font-size: 10px;text-transform: uppercase;color: white;text-shadow: 0px 1px 0px #646464;border-radius: 3px;
+}
+
+
+div.form_input input, div.form_input textarea {
+width: 80%;
+border: solid 1px #CCC;
+padding: 8px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+background: #F8F8F8;
+border-radius: 3px;
+color: #666;
+box-shadow: inset 0 1px 0 0px white;
+-webkit-box-shadow: inset 0 1px 0 0px white;
+}

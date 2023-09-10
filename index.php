@@ -1,0 +1,256 @@
+<?php 
+include("inc_connection.php");
+include("include/include_sessions.php");
+
+include_once("include/check_session.php");
+
+include("commonFunction.php");
+include("include/errors.php");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<?php include("head.php"); ?>
+</head>
+<body>
+<?php 
+
+if(isset($_GET['id']))
+{$id = $_GET['id'];}
+else
+{$id = 1;}
+
+if(isset($_GET['subId']))
+{$subId = $_GET['subId'];}else {$subId = "";}
+
+
+?>
+<!--Header-->
+<?php include("header.php"); ?>
+<!-- Header Ends -->
+
+<!--Oxygen Container-->
+<div id="oxygen_container">
+
+    <!--Primary Navigation-->
+    <?php include("primaryNav.php"); ?>
+    <!-- Primary Navigation Ends -->
+
+<!--Main Content-->
+
+<section id="main_content">
+
+<!--Secondary Navigation-->
+<?php include("secondaryNav.php"); ?>
+<!--Secondary Navigation Ends-->
+
+<!--Content Wrap-->
+<div id="content_wrap">	
+<!--Activity Stats-->
+    <?php include("activityStats.php"); ?>	            
+<!--Activity Stats Ends-->    
+        <!--Quick Actions-->
+        <?php include("quickStats.php"); ?>	
+        <!--Quick Actions Ends-->
+	
+    <!--Notification Message-->
+      	 <?php 
+
+		 if($id == "1" && $subId == "1"){ include("notificationMessage.php"); }?>	
+    <!--Notification Message Ends-->
+    
+    <!-- Start Including the Pages -->
+    
+      <?php
+					  
+		  		switch($id)
+				{
+					
+					case "1":
+						if($subId == "1"){include("uploadPicture.php");}
+						else if($subId == "2"){include("changePassword.php");}
+						else if($subId == "3"){include("gallery.php");}
+						else if($subId == "4"){include("demo.php");}
+						else if($subId == "5"){include("createUser.php");}
+						else if($subId == "6"){include("manageUser.php");}
+						else if($subId == "7"){include("userCreaterThanks.php");}
+						else if($subId == "8"){include("editUserProfile.php");}
+						else if($subId == "9"){include("viewManageUser.php");}
+						else if($subId == "10"){include("userUpdaterThanks.php");}
+						else if($subId == "11"){include("passwordChangedThanks.php");}
+						else if($subId == "12"){include("editUser.php");}
+						else if($subId == "13"){include("createActionChartWithMultipleEmail.php");}
+						
+						else {include("home.php");}
+						
+						break;
+					
+					case "2":
+						if($subId == "1"){include("calendar.php");}
+						else if($subId == "2"){include("charts_bar.php");}
+						else if($subId == "3"){include("manageClient.php");}
+						else if($subId == "4"){include("addNewClients.php");}
+						else if($subId == "5"){include("clientCreaterThanks.php");}
+						else if($subId == "6"){include("editClient.php");}
+						else if($subId == "7"){include("viewClientDetail.php");}
+						else if($subId == "8"){include("clientDetailUpdated.php");}
+						else if($subId == "9"){include("createLead.php");}
+						else if($subId == "11"){include("manageLeads.php");}
+						else if($subId == "12"){include("leadsFormGenaration.php");}
+						else if($subId == "13"){include("leadsFormGenaration2.php");}
+						else if($subId == "14"){include("myLeads.php");}
+						else if($subId == "15"){include("editlead.php");}
+						else if($subId == "16"){include("clientWiseTargetAndActivity.php");}
+						else if($subId == "17"){include("clientWiseTargetAndActivityForUsers.php");}
+						else if($subId == "18"){include("manageLeadsForClients.php");}
+						else if($subId == "19"){include("pcaCalculator.php");}
+						else if($subId == "20"){include("specialLeadPanel.php");}
+						else if($subId == "21"){include("deletedLeadPanel.php");}
+						else if($subId == "22"){include("leadRestoration.php");}
+						else if($subId == "23"){include("leadsDeletedFormGenaration2.php");}
+						else if($subId == "24"){include("myArchieveLeads.php");}
+						else if($subId == "25"){include("managePnl.php");}
+						else if($subId == "26"){include("leadsFormGenaration2_archieve.php");}
+                                                else if($subId == "27"){include("teamAchivement.php");}
+                                                else if($subId == "28"){include("editInvoice.php");}
+												else if($subId == "29"){include("teamAchivement_old.php");}
+
+						else {include("myLeads.php");}
+						
+						break;
+					case "3":
+						if($subId == "1"){include("MyActionChart.php");}
+						else if($subId == "2"){include("createActionChart.php");}
+						else if($subId == "3"){include("managingActionChart.php");}
+						else if($subId == "4"){include("ActionChartThanks.php");}
+						else if($subId == "5"){include("viewActionChart.php");}
+						else if($subId == "6"){include("editActionChart.php");}
+						else if($subId == "7"){include("ActionChartUpdateThanks.php");}
+						else if($subId == "8"){include("manageActionHistory.php");}
+						else if($subId == "9"){include("viewActionHistoryChart.php");}
+						else if($subId == "10"){include("specialActionPanel.php");}
+						else if($subId == "11"){include("deletedactionPanel.php");}
+						else if($subId == "12"){include("viewDeletedActionChart.php");}
+						else if($subId == "13"){include("myArchieveActionChart.php");}
+						else if($subId == "14"){include("viewActionChart2013.php");}
+						else {include("MyActionChart.php");}
+						break;
+					case "4":
+						if($subId == "1"){include("holidayList.php");}
+						else if($subId == "2"){include("policy.php");}
+						else {include("holidayList.php");}				
+						break;	
+					case "5":
+						if($subId == "1"){include("kbs.php");}
+						else if($subId == "2"){include("createKnowledgeBase.php");}
+						else if($subId == "3"){include("managekbs.php");}
+						else if($subId == "4"){include("playkbs.php");}
+						else if($subId == "5"){include("editkbs.php");}
+						else {include("kbs.php");}
+										
+						break;	
+					case "6":
+						if($subId == "1"){include("manageCategory.php");}
+						else if($subId == "2"){include("manageItem.php");}
+						else if($subId == "3"){include("addVendor.php");}
+						else if($subId == "4"){include("manageVendor.php");}
+						else if($subId == "5"){include("viewVendor.php");}
+						//else if($subId == "6"){include("manageVendor1.php");}
+						else if($subId == "6"){include("editVendor.php");}
+						else if($subId == "7"){include("raisePO.php");}
+						else if($subId == "8"){include("raisePOforitem.php");}
+						else if($subId == "9"){include("managePO.php");}
+						else if($subId == "10"){include("raiseInvoiceOrder.php");}
+						else {include("demo.php");}
+												
+						break;	
+					
+					case "7":
+						include("demo.php");
+						break;
+						
+					case "8":
+						include("demo.php");
+						break;	
+						
+					case "9":
+						include("demo.php");
+						break;
+						
+					case "10":
+						if($subId == "1"){include("thankyouForKnowledgeBase.php");}
+						else if($subId == "2"){include("thanksForPo.php");}
+						else {include("thankyou.php");}
+						break;	
+						
+					case "11":
+						include("dd.php");
+						break;	
+						
+					
+					case "12":
+						if($subId == "1"){include("calendar_retail.php");}
+						else if($subId == "2"){include("charts_bar.php");}
+						else if($subId == "3"){include("manageClient_retail.php");}
+						else if($subId == "4"){include("addNewClients_retail.php");}
+						else if($subId == "5"){include("clientCreaterThanks.php");}
+						else if($subId == "6"){include("editClient.php");}
+						else if($subId == "7"){include("viewClientDetail_retail.php");}
+						else if($subId == "8"){include("clientDetailUpdated.php");}
+						else if($subId == "9"){include("createLead_retail.php");}
+						else if($subId == "11"){include("manageLeads_retail.php");}
+						else if($subId == "12"){include("leadsFormGenaration.php");}
+						else if($subId == "13"){include("leadsFormGenaration2.php");}
+						else if($subId == "14"){include("myLeads_retail.php");}
+						else if($subId == "15"){include("editlead.php");}
+						else if($subId == "16"){include("clientWiseTargetAndActivity_retail.php");}
+						else if($subId == "17"){include("clientWiseTargetAndActivityForUsers_retail.php");}
+						else if($subId == "18"){include("manageLeadsForClients.php");}
+						else if($subId == "19"){include("pcaCalculator.php");}
+						else if($subId == "20"){include("specialLeadPanel.php");}
+						else if($subId == "21"){include("deletedLeadPanel.php");}
+						else if($subId == "22"){include("leadRestoration.php");}
+						else if($subId == "23"){include("leadsDeletedFormGenaration2.php");}
+						else if($subId == "24"){include("myArchieveLeads_retail.php");}
+						else if($subId == "25"){include("managePnl.php");}
+						else if($subId == "26"){include("leadsFormGenaration2_archieve.php");}
+						else {include("myLeads.php");}						
+						break;	
+						
+					case "13":
+						if($subId == "1"){include("addTraining.php");}
+						else if($subId == "2"){include("actionForTraining.php");}
+						else if($subId == "3"){include("training_session.php");}
+						else if($subId == "4"){include("editTrainingSession.php");}
+						else if($subId == "5"){include("editkbs.php");}
+						else {include("addTraining.php");}										
+						break;			
+						
+					
+										
+					case "default":
+						if($subId == "1"){include("demo.php");}
+						else if($subId == "2"){include("demo.php");}
+						else if($subId == "3"){include("demo.php");}
+						else if($subId == "4"){include("demo.php");}
+						else {include("home.php");}
+						
+						break;
+				}
+		  
+		  
+		  ?>
+	  
+	  
+	    
+    <!-- Page Including Ends -->
+         
+	     
+</div>
+</section>
+</div>
+
+</body>
+
+
+</html>

@@ -1,0 +1,1417 @@
+<?php 
+//Function to find the BD Name from oxy_user 
+function getBDdetails($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_users WHERE user_type = '3' AND user_id = '$id'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$fname = $res['fname'];
+	$lname = $res['lname'];
+	$name=$fname." ".$lname;
+	
+	$getBDdetails['0'] = $name;
+}
+
+return $getBDdetails;
+}
+
+//Function to find the Project Leader from oxy_user 
+function getProjectDetails($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_users WHERE user_type = '2' AND user_id = '$id'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$fname = $res['fname'];
+	$lname = $res['lname'];
+	$name=$fname." ".$lname;
+	
+	$getProjectDetails['0'] = $name;
+	
+}
+
+return $getProjectDetails;
+}
+
+//Function to find the Project Leader from oxy_user 
+function getClientDetails($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_clientn WHERE id = '$id'";
+
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row['companyname'];
+return $fname;
+
+return $fname;
+}
+
+//Function to find the Project Leader from oxy_user 
+function getClientListDetails($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_clientn WHERE id = '$id'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['companyname'];
+	$companyname['1'] = $res['ad'];
+
+	
+}
+
+return $companyname;
+}
+
+
+function getStatus($status,$dept) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_action WHERE department = '$dept' AND status = '$status'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+//--------------------get total charts for status-----------------------------------
+function get2Status($status) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_action WHERE status = '$status'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+//----------------------------------------------------------------------------
+
+
+
+function getempetails($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_users WHERE user_id = '$id'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$res = mysql_fetch_array($res2);
+	$fname = $res['fname'];
+	$lname = $res['lname'];
+	$name=$fname." ".$lname;
+	
+	//$getempdetails['0'] = $name;
+
+
+return $name;
+}
+
+function getempfname($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_users WHERE user_id = '$id'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$res = mysql_fetch_array($res2);
+	$fname = $res['fname'];
+	$lname = $res['lname'];
+	$name=$fname;
+	
+	//$getempdetails['0'] = $name;
+
+
+return $name;
+}
+
+//------------------------branch--------------------
+function getbranch($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_users WHERE user_id = '$id' and status='1'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$res = mysql_fetch_array($res2);
+	$branch = $res['branch'];
+
+return $branch;
+}
+//------------------------------------------------------------
+
+//------------------------branch count--------------------
+function getbranchcount($id) {
+//global $tablename, $db;
+$sql = "SELECT count(*) as cnt FROM oxy2_users WHERE branch = '$id'  and status='1'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$res = mysql_fetch_array($res2);
+$branch = $res['cnt'];
+
+return $branch;
+}
+//------------------------------------------------------------
+
+
+//------------------------branchall count--------------------
+function getbranchcountall() {
+//global $tablename, $db;
+$sql = "SELECT count(*) as cnt FROM oxy2_users WHERE status='1'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$res = mysql_fetch_array($res2);
+$branch = $res['cnt'];
+
+return $branch;
+}
+//------------------------------------------------------------
+
+//Function to find the Email from the Id 
+function getUserDetailsBasedOnUserId($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_users WHERE user_id in($id)";
+$res2 = mysql_query($sql);
+$coounts = mysql_num_rows($res2);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$getUserDetails = "";
+$i = 1;
+while($res = mysql_fetch_array($res2))
+{
+	if($i < $coounts){$emailid = $res['emailid'].",";}
+	else {$emailid = $res['emailid'];}
+	
+	$getUserDetails = $getUserDetails.$emailid;
+	$i++;
+}
+
+return $getUserDetails;
+}
+
+//Function to return the user type name 
+function getUserTypeName($user_type) {
+//global $tablename, $db;
+
+if($user_type == "1"){$userTypeName = "Admin";}
+else if($user_type == "2"){$userTypeName = "Project Leader";}
+else if($user_type == "3"){$userTypeName = "BD Head";}
+else if($user_type == "4"){$userTypeName = "BD Person";}
+else if($user_type == "5"){$userTypeName = "Regular";}
+else {$userTypeName = "Something wrong";}
+
+return $userTypeName;
+}
+
+
+function getClientCount() {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_clientn";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$count=$row[0];
+return $count;
+}
+
+//------------------------profile pic--------------------
+function getprofilepic($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_uploadedimage WHERE usr_Id = '$id' AND area = '1'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$res = mysql_fetch_array($res2);
+	$pic = $res['name'];
+
+return $pic;
+}
+//------------------------------------------------------------
+
+//------------------------profile pic--------------------
+function getUserDetail($email) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_users WHERE username = '$email' AND status = '1'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$res = mysql_fetch_array($res2);
+	$user_id = $res['user_id'];
+
+return $user_id;
+}
+//------------------------------------------------------------
+
+//--------------------get total lead for status-----------------------------------
+function get2leadall() {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_lead";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+//----------------------------------------------------------------------------
+//--------------------get total lead for status-----------------------------------
+function gettotlead() {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_lead WHERE bdstatus <> 'Proposal' and bdstatus <> 'Prospect'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+//----------------------------------------------------------------------------
+
+//--------------------get total lead for status-----------------------------------
+function getleadstatus($status) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_lead WHERE bdstatus = '$status'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+//----------------------------------------------------------------------------
+//--------------------get total lead for status-----------------------------------
+function get2lead($dept) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_lead WHERE dept = '$dept'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+//----------------------------------------------------------------------------
+
+//--------------------get total action for the action and lead-----------------------------------
+function getTotalDateline($actionChartId,$leadNum) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_dateline WHERE eventid = '$actionChartId' AND leadNumber = '$leadNum'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$count=$row[0];
+return $count;
+}
+//----------------------------------------------------------------------------
+
+
+//--------------------get md5 password generator-----------------------------------
+function gen_md5_password($len)
+{
+    // function calculates 32-digit hexadecimal md5 hash
+    // of some random data
+    return substr(md5(rand().rand()), 0, $len);
+}
+//----------------------------------------------------------------------------
+
+//--------------------get automatic string-----------------------------------
+function generateString($len,$demoString)
+{
+    return substr($demoString, 0, $len);
+}
+//----------------------------------------------------------------------------
+
+
+//--------------------**User Deatial**-----------------------------------
+function getUserListDetails($userId) {
+$sql = "SELECT * FROM oxy2_users WHERE user_id = '$userId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['emp_id'];
+	$companyname['1'] = $res['username'];
+	$companyname['2'] = $res['user_type'];
+	$companyname['3'] = $res['status'];
+	$companyname['4'] = $res['fname'];
+	$companyname['5'] = $res['lname'];
+	$companyname['6'] = $res['gender'];
+	$companyname['7'] = $res['doj'];
+	$companyname['8'] = $res['dob'];
+	$companyname['9'] = $res['job_title'];
+	$companyname['10'] = $res['emailid'];
+	$companyname['11'] = $res['alternateEmail'];
+	$companyname['12'] = $res['branch'];
+	$companyname['13'] = $res['address1'];
+	$companyname['14'] = $res['phone'];
+	$companyname['15'] = $res['landlineNumber'];
+	$companyname['16'] = $res['city'];
+	$companyname['17'] = $res['created_on'];
+	$companyname['18'] = $res['modified_on'];
+	$companyname['19'] = $res['modified_by'];
+	$companyname['20'] = $res['dept'];
+	$companyname['21'] = $res['officeAddress'];
+	$companyname['22'] = $res['clientExperience'];
+	$companyname['23'] = $res['categoryExperience'];
+	$companyname['24'] = $res['bestCreativeWork'];
+	$companyname['25'] = $res['bio'];
+	$companyname['26'] = $res['personalStatement'];
+	
+	
+}
+
+return $companyname;
+}
+
+//To calculate total Invoiced GP for the Client
+function getInvoicedGPForClient($clientId) {
+			
+			$sql = "SELECT * FROM oxy2_leadinvoice WHERE companyId = '$clientId'";
+			
+			$res2 = mysql_query($sql);
+			if (!$res2) {
+			return mysql_error();
+			exit;
+			}
+			$totalInvoicedGP = "0";
+			while($res = mysql_fetch_array($res2))
+			{
+			$totalInvoicedGP = $totalInvoicedGP + $res['invoiceGp'];
+			}
+			
+			return $totalInvoicedGP;
+			}
+			
+//To calculate total Invoiced GP for the Lead
+function getInvoicedGPForLead($leadId) {
+			
+			$sql = "SELECT * FROM oxy2_leadinvoice WHERE leadId = '$leadId'";
+			
+			$res2 = mysql_query($sql);
+			if (!$res2) {
+			return mysql_error();
+			exit;
+			}
+			$totalInvoicedGP = "0";
+			while($res = mysql_fetch_array($res2))
+			{
+			$totalInvoicedGP = $totalInvoicedGP + $res['invoiceGp'];
+			}
+			
+			return $totalInvoicedGP;
+			}			
+			
+
+
+
+//--------------------**Total Invoice**-----------------------------------
+function getTotalInvoice($leadId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_leadinvoice WHERE leadId = '$leadId'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+//--------------------**Total Invoice**-----------------------------------
+
+
+
+
+//--------------------**Total contract upload function**-----------------------------------
+function getTotalcon($leadId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_upload_op WHERE event_id = '$leadId' and path='contracted' ";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+function getTotalop($leadId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_upload_op WHERE event_id = '$leadId' and path='op' ";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+//--------------------**Total Invoice**-----------------------------------
+
+
+//--------------------**Total Client Price according to pessimistic ,realistic , optimistic**-----------------------------------
+function getYTD($type,$companyId,$limit) {
+
+$sql = "SELECT * FROM oxy2_clientn WHERE id = '$companyId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$sum = 0;
+for($i=1;$i<=$limit;$i++){
+$newField = $type."_m".$i;
+$sum = $sum + $row[$newField];
+}
+return round($sum,0);
+}
+
+//--------------------**Total Accural Value**-----------------------------------
+function getYTDACC($companyId,$bdStatus) {
+	if (is_numeric($companyId)) 
+	{
+		$sql = "SELECT * FROM oxy2_lead WHERE companyname = '$companyId' AND bdstatus = '$bdStatus'";
+		$res2 = mysql_query($sql);
+		if (!$res2) {
+		   return mysql_error();
+		   exit;
+		}
+		$sum = 0;
+		
+		if($bdStatus == "Invoiced"){
+			
+		$sum = getInvoicedGPForClient($companyId);
+		}
+		else
+		{
+		$sum=0;	
+		while($res = mysql_fetch_array($res2))
+		{
+				
+			$revenue = $res['revnue'];
+			$profit = $res['profit'];
+			
+			//$profitInRupees = ($profit*$revenue)/100;
+			$profitInRupees = $revenue;
+			
+			$sum = $sum + $profitInRupees;
+		}
+		
+		}// end if 
+		return round($sum,0);
+	}
+	else
+	{
+		return "Please enter numeric Value for Company Name";
+	}
+}
+
+
+//--------------------**Total YTDCredit**-----------------------------------
+function getYTDCredit($companyId) {
+	if (is_numeric($companyId)) 
+	{
+
+		$sum= getYTDACC($companyId,"Contracted") + getYTDACC($companyId,"Invoiced");  
+
+		return round($sum,0);
+	}
+	else
+	{
+		return "Please enter numeric Value for Company Name";
+	}
+
+}
+
+//--------------------**YTD Percent**-----------------------------------
+function getYTDPercent($companyId,$type,$limit) {
+	if (is_numeric($companyId)) 
+	{
+
+		$getYTDCredit = getYTDCredit($companyId); 
+		$getYTD = getYTD($type,$companyId,$limit);
+		
+		if($getYTD > 0)
+		{
+		$percent = ($getYTDCredit * 100)/$getYTD;
+		}
+		else
+		{
+		$percent =0;	
+		}
+
+		return round($percent);
+	}
+	else
+	{
+		return "Please enter numeric Value for Company Name";
+	}
+
+}
+
+//--------------------**YTD Percent on total revenue of Clinet**-----------------------------------
+function getYTDPercentTotal($getYTDCredit,$getYTD) {
+	if (is_numeric($getYTDCredit)) 
+	{
+	
+		if($getYTD > 0)
+		{
+		$percent = ($getYTDCredit * 100)/$getYTD;
+		}
+		else
+		{
+		$percent =0;	
+		}
+
+		return round($percent);
+	}
+	else
+	{
+		return "Please enter numeric Value for Company Name";
+	}
+
+}
+
+
+
+function getpnl($companyId) {
+
+
+/*	  
+  a1 = 50/100
+  b1 = prop/5
+  a2 = 30/100
+  b2 = lead1/3
+  a3 = 20/100
+  b3 = negotiation/2
+  'Its Now Accured Section.....
+  a4 = 90/100
+  b4 = contracted/9
+  'res4in = Ccur(b1) + Ccur(b2) + Ccur(b3) + Ccur(b4) 
+  res4in = Ccur(b1) + Ccur(b2) + Ccur(b3)
+  'res4in = res4in + Ccur(b2) 
+  plnc = res4in
+  response.write FormatNumber((res4in),0)
+  plntotal = plntotal + FormatNumber((res4in),0)	
+	  
+*/
+	if (is_numeric($companyId)) 
+	{
+		$sql = "SELECT * FROM oxy2_lead WHERE companyname = '$companyId' ";
+		$res2 = mysql_query($sql);
+		if (!$res2) {
+		   return mysql_error();
+		   exit;
+		}
+		$sum = 0;
+		
+		//while($res = mysql_fetch_array($res2))
+		//{
+			
+			
+  			$b1 = (getYTDACC($companyId,"Proposal")/100) * 20; // $discount_value = ($total / 100) * $percent; 
+  			$b2 = (getYTDACC($companyId,"Lead")/100)  * 30;
+  			$b3 = (getYTDACC($companyId,"Negotiation")/100) * 50;
+			//$b4 = getYTDACC($companyId,"Contracted")/9;
+  
+			$pnl= $b1 + $b2 + $b3;
+			
+			$sum = $sum + $pnl;
+		//}
+		
+		return round($pnl,0);
+	}
+	else
+	{
+		return "Please enter numeric Value for Company Name";
+	}
+	
+	
+}
+
+//b7 = Ccur(anual) - Ccur(ytdc)
+
+//--------------------**Total PerformanceGap**-----------------------------------
+function getPerformanceGap($type,$companyId,$limit) {
+	if (is_numeric($companyId)) 
+	{
+
+		$sum= getYTD($type,$companyId,$limit) - getYTDCredit($companyId);  
+
+		return round($sum,0);
+	}
+	else
+	{
+		return "Please enter numeric Value for Company Name";
+	}
+
+}
+
+//res4in = Ccur(pipgap) - Ccur(plnc) - Ccur(ytdc)
+
+
+//--------------------**Total PerformanceGap**-----------------------------------
+function getPipelineGap($type,$companyId,$limit) {
+	if (is_numeric($companyId)) 
+	{
+
+		$sum= getPerformanceGap($type,$companyId,$limit + 3) - getpnl($companyId) - getYTDCredit($companyId);  
+
+		return round($sum,0);
+	}
+	else
+	{
+		return "Please enter numeric Value for Company Name";
+	}
+
+}
+
+//--------------------**Lead Detail**-----------------------------------
+function getLeadListDetails($leadId) {
+$sql = "SELECT * FROM oxy2_lead WHERE id = '$leadId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$LeadListDetails['0'] = $res['leadno'];
+	$LeadListDetails['1'] = $res['contact'];
+	$LeadListDetails['2'] = $res['companyname'];
+	$LeadListDetails['3'] = $res['dept'];
+	$LeadListDetails['4'] = $res['add1'];
+	$LeadListDetails['5'] = $res['ccity'];
+	$LeadListDetails['6'] = $res['country'];
+	$LeadListDetails['7'] = $res['mob'];
+	$LeadListDetails['8'] = $res['email'];
+	$LeadListDetails['9'] = $res['desg'];
+	$LeadListDetails['10'] = $res['othersact'];
+	$LeadListDetails['11'] = $res['event_city'];
+	$LeadListDetails['12'] = $res['event_country'];
+	$LeadListDetails['13'] = $res['keydel'];
+	$LeadListDetails['14'] = $res['specinst'];
+	$LeadListDetails['15'] = $res['eventbrief'];
+	$LeadListDetails['16'] = $res['bdstatus'];
+	$LeadListDetails['17'] = $res['curr'];
+	$LeadListDetails['18'] = $res['profit'];
+	$LeadListDetails['19'] = $res['revnue'];
+	$LeadListDetails['20'] = $res['lgs'];
+	$LeadListDetails['21'] = $res['beventStartDate'];
+	$LeadListDetails['22'] = $res['beventEndDate'];
+	$LeadListDetails['23'] = $res['coutelet_type'];
+	$LeadListDetails['24'] = $res['c_permission'];
+	$LeadListDetails['25'] = $res['cnumber_outlets'];
+	$LeadListDetails['26'] = $res['cnumberOfdays'];
+	$LeadListDetails['27'] = $res['creator'];
+	$LeadListDetails['28'] = $res['creatorid'];
+	$LeadListDetails['29'] = $res['updatedby'];
+	$LeadListDetails['30'] = $res['updationdate'];
+	$LeadListDetails['31'] = $res['leadname'];
+	$LeadListDetails['32'] = $res['reg_time'];
+	$LeadListDetails['33'] = $res['invdate'];
+	$LeadListDetails['34'] = $res['invno'];
+	$LeadListDetails['35'] = $res['invamount'];
+	$LeadListDetails['35'] = $res['paychnn'];
+	$LeadListDetails['36'] = $res['paymentcoll'];
+	$LeadListDetails['37'] = $res['paydaterece'];
+	$LeadListDetails['38'] = $res['paybal'];
+	$LeadListDetails['39'] = $res['exppaydate'];
+	$LeadListDetails['40'] = $res['othclient'];
+	$LeadListDetails['41'] = $res['invgp'];
+	$LeadListDetails['42'] = $res['digital_work'];
+	$LeadListDetails['43'] = $res['otherDigitalWork'];
+	$LeadListDetails['44'] = $res['retail'];
+	$LeadListDetails['45'] = $res['zone'];
+	$LeadListDetails['46'] = $res['leadtype'];
+	$LeadListDetails['47'] = $res['fdate'];
+	$LeadListDetails['48'] = $res['tdate'];
+	$LeadListDetails['49'] = $res['contractee1'];
+	$LeadListDetails['50'] = $res['contractee2'];
+	$LeadListDetails['51'] = $res['contractee3'];
+	$LeadListDetails['52'] = $res['contractee4'];
+	$LeadListDetails['53'] = $res['reasonType'];
+	$LeadListDetails['54'] = $res['leadDeletionReason'];
+	$LeadListDetails['55'] = $res['reason'];
+	$LeadListDetails['56'] = $res['leadStatus'];
+	$LeadListDetails['57'] = $res['id'];
+	
+	
+	
+	
+}
+
+return $LeadListDetails;
+}
+
+//--------------------**Total Invoice for particular Lead and particular company Id**-----------------------------------
+function getTotalInvoiceByLeadANDCompanyId($leadId,$companyId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_leadinvoice WHERE leadId = '$leadId' AND companyId = '$companyId'";
+
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$count=$row[0];
+return $count;
+}
+
+//--------------------**Total Invoice for particular Lead and particular company Id**-----------------------------------
+
+
+//To calculate total Revenue for the lead between  two dates
+function getRevenueBetweenDates($leadId,$fromDate,$toDate) {
+			
+			$sql = "SELECT * FROM oxy2_leadinvoice WHERE leadId = '$leadId' AND closureDate BETWEEN '$fromDate' AND '$toDate'";
+			//$sql = "SELECT * FROM `oxy2_leadinvoice` WHERE `leadId` = '83' AND closureDate BETWEEN '2013-1-19' AND '2013-1-21'";
+			$res2 = mysql_query($sql);
+			if (!$res2) {
+			return mysql_error();
+			exit;
+			}
+			$totalInvoiceValue = "0";
+			while($res = mysql_fetch_array($res2))
+			{
+			$totalInvoiceValue = $totalInvoiceValue + $res['invoiceValue'];
+			}
+			
+			return $totalInvoiceValue;
+			}
+			
+
+//Get all the Zones for the Logged In User
+function getZoneForLoggedIn($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_zonal WHERE userId = $id";
+$res2 = mysql_query($sql);
+$coounts = mysql_num_rows($res2);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$getZone = "";
+$i = 1;
+while($res = mysql_fetch_array($res2))
+{
+	if($i < $coounts){$zoneName = "'".$res['zoneName']."'".",";}
+	else {$zoneName = "'".$res['zoneName']."'";}
+	
+	$getZone = $getZone.$zoneName;
+	$i++;
+}
+
+return $getZone;
+}
+
+//Get all the Client Id for the Logged In User
+function getClientIdForLoggedIn($id) {
+//global $tablename, $db;
+$sql = "SELECT * FROM oxy2_clientn WHERE ad = $id";
+$res2 = mysql_query($sql);
+$coounts = mysql_num_rows($res2);
+if (!$res2) {
+   return " ";
+   exit;
+}
+$getClientId = "";
+$i = 1;
+while($res = mysql_fetch_array($res2))
+{
+	if($i < $coounts){$ClientRowId = "'".$res['id']."'".",";}
+	else {$ClientRowId = "'".$res['id']."'";}
+	
+	$getClientId = $getClientId.$ClientRowId;
+	$i++;
+}
+
+return $getClientId;
+}
+
+//Function To call the getClinetIdForLogin And getZoneForLoggedIn
+function getCombinedResultForLoggedInUser($userIdforAction)
+{
+
+		  $zoneExists = getZoneForLoggedIn($userIdforAction);
+		  
+		  if(!empty($zoneExists))
+		  {
+			  $cond = "WHERE zone in (".$zoneExists.")";
+			  
+		  }
+		  else
+		  {
+			$ClientExists = getClientIdForLoggedIn($userIdforAction);
+			if(!empty($ClientExists))
+			{
+			$cond = "WHERE id in (".$ClientExists.")";  
+			}
+			else
+			{
+			$cond = "";
+			}
+			
+		   }
+		   
+		  return $cond; 
+	
+	
+}
+
+//--------------------get total lead for company Name----------------------------------
+function get2leadallForClient($clientId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_lead WHERE companyname = '$clientId'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+//----------------------------------------------------------------------------
+
+
+
+//To calculate total Revenue for the lead between  two dates
+function getPCD($clientId,$monthDigit,$year) {
+			
+			$numberInMonth = cal_days_in_month(CAL_GREGORIAN, $monthDigit, $year);
+			$fromDate = $year."-".$monthDigit."-1";
+			$toDate = $year."-".$monthDigit."-".$numberInMonth;
+			
+			
+			$sql = "SELECT * FROM oxy2_lead WHERE bdstatus='Contracted' and companyname = '$clientId' AND exppaydate BETWEEN '$fromDate' AND '$toDate'";
+			
+			$res2 = mysql_query($sql);
+			if (!$res2) {
+			return mysql_error();
+			exit;
+			}
+			$totalInvoiceValue = "0";
+			while($res = mysql_fetch_array($res2))
+			{
+			$totalInvoiceValue = $totalInvoiceValue + $res['revnue'];
+			}
+			
+			return $totalInvoiceValue;
+			}
+
+
+//To calculate total Revenue for the Client Name between  two dates
+function getPCDForCalculator($clientId,$fromDate,$toDate) {
+			
+			//$numberInMonth = cal_days_in_month(CAL_GREGORIAN, $monthDigit, $year);
+			//$fromDate = $year."-".$monthDigit."-1";
+			//$toDate = $year."-".$monthDigit."-".$numberInMonth;
+					
+			$sql = "SELECT * FROM oxy2_lead WHERE companyname = '$clientId' AND exppaydate BETWEEN '$fromDate' AND '$toDate'";
+			
+			$res2 = mysql_query($sql);
+			if (!$res2) {
+			return mysql_error();
+			exit;
+			}
+			$totalInvoiceValue = "0";
+			while($res = mysql_fetch_array($res2))
+			{
+			$totalInvoiceValue = $totalInvoiceValue + $res['revnue'];
+			}
+			
+			return $totalInvoiceValue;
+			}
+			
+
+//To calculate total Actions for the Lead number
+function getCountForLead($leadNumber,$dept) {
+
+$sql = "SELECT count(*) FROM oxy2_action WHERE department = '$dept' AND leadNum = '$leadNumber'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+//--------------------**Get complete Client Details**-----------------------------------
+function getCompleteClientListDetails($clientId) {
+$sql = "SELECT * FROM oxy2_clientn WHERE id = '$clientId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$clientListDetails['0'] = $res['companyname'];
+	$clientListDetails['1'] = $res['ad'];
+	
+}
+
+return $clientListDetails;
+}
+
+
+//Find the total Count for Lead To be deleted form oxy2_lead
+function getTotalleadLD() {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_lead  WHERE leadStatus = '4' ";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+//Find the total Count for Lead To be deleted form oxy2_leaddeleted
+function getTotalleadDeleted() {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_leaddeleted  WHERE leadStatus = '4' ";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+
+
+//Find the total Count for Action Chart To be deleted form oxy2_lead
+function getTotalActionLD() {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_action  WHERE actionStatus = '4' ";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+//Find the total Count for Action Chart To be deleted form oxy2_leaddeleted
+function getTotalActionDeleted() {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_actiondeleted  WHERE actionStatus = '4' ";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+
+//--------------------**User Deatial**-----------------------------------
+function getActionChartDetails($actionId) {
+$sql = "SELECT * FROM oxy2_action WHERE id = '$actionId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['id'];
+	$companyname['1'] = $res['userId'];
+	$companyname['2'] = $res['department'];
+	$companyname['3'] = $res['leadNum'];
+	$companyname['4'] = $res['leadIdentification'];
+	$companyname['5'] = $res['completeLeadNumber'];
+	$companyname['6'] = $res['campaignName'];
+	$companyname['7'] = $res['clientName'];
+	$companyname['8'] = $res['stage'];
+	$companyname['9'] = $res['keyAccount'];
+	$companyname['10'] = $res['keyact'];
+	$companyname['11'] = $res['venue'];
+	$companyname['12'] = $res['city'];
+	$companyname['13'] = $res['type'];
+	$companyname['14'] = $res['eventDate'];
+	$companyname['15'] = $res['fromDate'];
+	$companyname['16'] = $res['endDate'];
+	$companyname['17'] = $res['projectLeader'];
+	$companyname['18'] = $res['bdName'];
+	$companyname['19'] = $res['status'];
+	$companyname['20'] = $res['email'];
+	$companyname['21'] = $res['campaignBrief'];
+	$companyname['22'] = $res['progress'];
+	$companyname['23'] = $res['criticalIssue'];
+	$companyname['24'] = $res['taskDay'];
+	$companyname['25'] = $res['updatedBy'];
+	$companyname['26'] = $res['updatedOn'];
+	$companyname['27'] = $res['dateAdded'];
+	
+	
+}
+
+return $companyname;
+}
+
+function getKnowledgeBaseUploadCount($eventId,$path,$extension) {
+
+$sql = "SELECT count(*) FROM oxy2_upload_op WHERE event_id = '$eventId' and path='$path' and extension='$extension'";
+
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+//--------------------**Category Detail**-----------------------------------
+function getCategoryListDetails($categoryId) {
+$sql = "SELECT * FROM oxy2_category  WHERE categoryId = '$categoryId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['categoryId'];
+	$companyname['1'] = $res['categoryName'];
+	$companyname['2'] = $res['categoryDetails'];
+	$companyname['3'] = $res['status'];
+	$companyname['4'] = $res['fname'];
+	$companyname['5'] = $res['dateAdded'];
+	
+	
+	
+}
+
+return $companyname;
+}
+
+//--------------------**User Deatial**-----------------------------------
+function getCityListDetails($cityId) {
+$sql = "SELECT * FROM oxy2_city  WHERE city_id = '$cityId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$cityname['0'] = $res['city_name'];
+	$cityname['1'] = $res['region'];
+	$cityname['2'] = $res['dateAdded'];
+}
+
+return $cityname;
+}
+
+
+//--------------------**Vendor Id **-----------------------------------
+function getVendorId($id) {
+$sql = "SELECT * FROM oxy2_raise_povendor  WHERE id = '$id'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$vendor['0'] = $res['vendorId'];
+	$vendor['1'] = $res['leadNumber'];
+	
+}
+
+return $vendor;
+}
+
+
+function getCountForItem($vendorId) {
+
+$sql = "SELECT count(*) FROM oxy2_itemtovendor WHERE vendor = '$vendorId'";
+//echo "$sql";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+//--------------------**Vendor Deatial**-----------------------------------
+function getVendorDetails($vendorId) {
+$sql = "SELECT * FROM oxy2_vendor WHERE vendorId = '$vendorId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['vendorId'];
+	$companyname['1'] = $res['vendor'];
+	$companyname['2'] = $res['contactPerson'];
+	$companyname['3'] = $res['zone'];
+	$companyname['4'] = $res['city'];
+	$companyname['5'] = $res['address'];
+	$companyname['6'] = $res['status'];
+	$companyname['7'] = $res['category'];
+	$companyname['8'] = $res['phoneNumber'];
+	$companyname['9'] = $res['mobileNumber'];
+	$companyname['10'] = $res['fax'];
+	$companyname['11'] = $res['email'];
+	$companyname['12'] = $res['pan'];
+	$companyname['13'] = $res['vat'];
+	$companyname['14'] = $res['vinfa'];
+	$companyname['15'] = $res['currency'];
+	$companyname['16'] = $res['credit'];
+	$companyname['17'] = $res['dateAdded'];
+	
+	
+}
+
+return $companyname;
+}
+
+//--------------------**Vendor Deatial**-----------------------------------
+function getitemDetails($itemId) {
+$sql = "SELECT * FROM oxy2_item WHERE itemId = '$itemId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['itemId'];
+	$companyname['1'] = $res['itemName'];
+	$companyname['2'] = $res['itemDetails'];
+	$companyname['3'] = $res['categoryId'];
+	$companyname['4'] = $res['status'];
+	$companyname['5'] = $res['dateAdded'];
+	
+	
+}
+
+return $companyname;
+}
+
+//--------------------**Get lead Detail by leadnumber and Departmenet**-----------------------------------
+function getleadDetailsbased($leadno,$dept) {
+$sql = "SELECT * FROM oxy2_lead WHERE leadno = '$leadno' AND dept = '$dept'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['leadname'];
+	
+	
+	
+}
+
+return $companyname;
+}
+
+function getUserPocheckStatus($userId,$raisePOId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_userpermit_records WHERE userId = '$userId' AND vendorRaisedId = '$raisePOId'";
+
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+function getPOAprovalcount($raisePOId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_userpermit_records WHERE vendorRaisedId = '$raisePOId' AND status = '1'";
+
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+function getPODisapprovalcount($raisePOId) {
+//global $tablename, $db;
+
+$sql = "SELECT count(*) FROM oxy2_userpermit_records WHERE vendorRaisedId = '$raisePOId' AND status = '0'";
+
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return mysql_error();
+   exit;
+}
+$row = mysql_fetch_array($res2);
+$fname=$row[0];
+return $fname;
+}
+
+
+//--------------------**Knowledge Base Deatial**-----------------------------------
+function getKnowledgeBaseDetails($eventId) {
+$sql = "SELECT * FROM oxy2_knowledgebase WHERE id = '$eventId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['id'];
+	$companyname['1'] = $res['title'];
+	$companyname['2'] = $res['description'];
+	
+	
+	
+}
+
+return $companyname;
+}
+
+
+//--------------------**Upload  Base Deatial**-----------------------------------
+function getUploadeddDetails($eventId) {
+$sql = "SELECT * FROM oxy2_upload_op WHERE id = '$eventId'";
+$res2 = mysql_query($sql);
+if (!$res2) {
+   return " ";
+   exit;
+}
+while($res = mysql_fetch_array($res2))
+{
+	$companyname['0'] = $res['id'];
+	$companyname['1'] = $res['event_Id'];
+	$companyname['2'] = $res['name'];
+	
+	
+	
+}
+
+return $companyname;
+}
+
+
+
+
+?>
